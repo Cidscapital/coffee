@@ -15,7 +15,7 @@ include('../includes/header.php');
                       <div class="text-center">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                           style="width: 185px;" alt="logo">
-                        <h4 class="mt-1 mb-5 pb-1">Coffee System Login</h4>
+                        <h4 class="mt-1 mb-5 pb-1">Coffee System Admin Login</h4>
                       </div>
                       <form method="POST" action="../functions/authentication.php">
       
@@ -51,12 +51,12 @@ include('../includes/header.php');
       
                         <div class="text-center pt-1 mb-5 pb-1">
                           <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" name="loginBtn" type="submit">Log in</button>
-                          <a class="text-muted" href="#">Forgot password?</a>
+                          <a class="text-muted" href="../Sign-Up-Page/register.php">Register Here!</a>
                         </div>
       
                         <div class="d-flex align-items-center justify-content-center pb-4">
-                          <p class="mb-0 me-2">Don't have an account?</p>
-                          <a href="../Sign-Up-Page/register.php" class="btn btn-outline-danger">Create new</a>
+                          <p class="mb-0 me-2">Are You a Factory Manage?</p>
+                          <a href="managerlogin.php" class="btn btn-outline-danger">Log in</a>
                         </div>    
                       </form>
                     </div>

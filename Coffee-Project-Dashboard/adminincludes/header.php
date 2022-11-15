@@ -1,5 +1,5 @@
 <?php 
-
+include('functions/sqlfunctions.php');
 $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
 ?>
 <!DOCTYPE html>
@@ -39,9 +39,9 @@ $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
       <li class="nav-item d-none d-sm-inline-block">
         <a href="coffeeProjectDashboard.php" class="nav-link <?php if($path=='coffeeProjectDashboard.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Home</strong></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="items.php" class="nav-link <?php if($path=='items.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Items</strong></a>
-      </li>
+      </li> -->
       <li class="nav-item d-none d-sm-inline-block">
         <a href="loans.php" class="nav-link <?php if($path=='loans.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Loans</strong></a>
       </li>
@@ -159,26 +159,24 @@ $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="factoryjournal.php?id=19" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Nyeri Factory</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="factoryjournal.php?id=20" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Scooter Factory</p>
-                </a>
-              </li>
+              <?php 
+                $factories = getAll('society', 'name');
+                foreach ($factories as $factory) { ?>
+                  <li class="nav-item">
+                    <a href="factoryjournal.php?id=<?php echo $factory['id']; ?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p><?php echo $factory['name'] ?></p>
+                    </a>
+                  </li>
+          <?php  }
+              ?>
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="summary.php" class="nav-link <?= $path == 'summary.php'?'active':''; ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Simple Link
-                <span class="right badge badge-info">New</span>
+                Summary of Factory Journals
               </p>
             </a>
           </li>

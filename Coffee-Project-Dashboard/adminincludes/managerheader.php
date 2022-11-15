@@ -69,7 +69,7 @@ $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="coffeeProjectDashboard.php" class="brand-link">
+    <a href="managerDashboard.php" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="Coffee-Project Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-dark">Coffee Project</span>
     </a>
@@ -130,8 +130,7 @@ $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
               </p>
             </a> 
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="managerfactoryjournal.php" class="nav-link <?= $path == 'managerfactoryjournal.php'?'active':''; ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Factory Journal

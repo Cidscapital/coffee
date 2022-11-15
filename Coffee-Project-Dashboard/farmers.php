@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include('adminincludes/header.php'); 
-include('functions/sqlfunctions.php');
+
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -48,8 +48,8 @@ include('functions/sqlfunctions.php');
                                     <th scope="col">Member Number</th>
                                     <th scope="col">Phone Number</th>
                                     <th scope="col">Location</th>
-                                    <th scope="col">Bank Number</th>
                                     <th scope="col">Society ID</th>
+                                    <th scope="col">Details</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -65,8 +65,8 @@ include('functions/sqlfunctions.php');
                                             <td><?php echo $farmer['member_number'] ?></td>
                                             <td><?php echo $farmer['phone_number'] ?></td>
                                             <td><?php echo $farmer['location'] ?></td>
-                                            <td><?php echo $farmer['bank_number'] ?></td>
                                             <td><?php echo $farmer['society_id'] ?></td>
+                                            <td><a href="farmerdetails.php?id=<?php echo $farmer['id'] ?>">See Details</a></td>
                                             <td><a href="editfarmer.php?id=<?php echo $farmer['id'] ?>" class="btn btn-primary">Edit</a> | 
                                             <button type="button" class="btn btn-danger farmerdeletebtn">Delete</button></td>
                                         </tr>

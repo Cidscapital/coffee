@@ -1,6 +1,7 @@
 <?php 
-include('../functions/authentication.php');
+session_start();
 include('adminincludes/header.php');
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->

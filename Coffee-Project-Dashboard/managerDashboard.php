@@ -14,7 +14,7 @@ include('adminincludes/managerheader.php');
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="coffeeProjectDashboard.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="managerDashboard.php">Home</a></li>
               <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
@@ -32,14 +32,24 @@ include('adminincludes/managerheader.php');
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>
+                  <?php
+                    if(isset($_SESSION['auth_user'])){
+                      $societyid = $_SESSION['auth_user']['societyid'];
+                      $deliveries_query = "SELECT * FROM deliveries WHERE factory_id=$societyid";
+                      $deliveries = mysqli_query($conn, $deliveries_query);
 
-                <p>Factory Journal</p>
+                      echo mysqli_num_rows($deliveries);
+                    }
+                  ?>
+                </h3>
+
+                <p>Deliveries Recorded</p>
               </div>
               <div class="icon">
                 <i class="ion ion-ios-book-outline"></i>
               </div>
-              <a href="#" class="small-box-footer"><strong>More info</strong><i class="fas fa-arrow-circle-right"></i></a>
+              <a href="managerfactoryjournal.php" class="small-box-footer"><strong>More info</strong><i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -47,14 +57,25 @@ include('adminincludes/managerheader.php');
             <!-- small box -->
             <div class="small-box" style="background-color: #E6E6FA;">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>
+                <?php
+                    if(isset($_SESSION['auth_user'])){
+                      $societyid = $_SESSION['auth_user']['societyid'];
+                      $deliveries_received = "SELECT sum(qty_delivered) as kilos FROM deliveries WHERE factory_id=$societyid";
+                      $received = mysqli_query($conn, $deliveries_received);
+                      $data = mysqli_fetch_array($received);
+                      echo $data['kilos'];
+
+                    }
+                  ?>
+                  <sup style="font-size: 20px">Kgs</sup></h3>
 
                 <p>Kilos Received</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer"><strong>More info</strong><i class="fas fa-arrow-circle-right"></i></a>
+              <a href="managerdeliveries.php" class="small-box-footer"><strong>More info</strong><i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -63,7 +84,18 @@ include('adminincludes/managerheader.php');
             <!-- small box -->
             <div class="small-box" style="background-color: #B2FFFF;">
               <div class="inner">
-                <h3>44</h3>
+                <h3>
+                  <?php
+                    if(isset($_SESSION['auth_user'])){
+                      $societyid = $_SESSION['auth_user']['societyid'];
+                      $farmer_query = "SELECT * FROM farmer WHERE society_id=$societyid";
+                      $farmers = mysqli_query($conn, $farmer_query);
+
+                      echo mysqli_num_rows($farmers);
+                    }
+                  ?>
+
+                </h3>
 
                 <p>Farmers Registered</p>
               </div>

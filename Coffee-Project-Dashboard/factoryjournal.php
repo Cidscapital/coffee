@@ -1,7 +1,6 @@
 <?php 
 session_start();
-include('adminincludes/header.php'); 
-include('functions/sqlfunctions.php');
+include('adminincludes/header.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -32,10 +31,20 @@ include('functions/sqlfunctions.php');
                     <h5 class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                Factory Journal
+                                <?php
+                                    if(isset($_GET['id'])){
+                                        $societyid = $_GET['id'];
+                                        $factory = getByID('society', $societyid);
+                                        if(mysqli_num_rows($factory) > 0){
+                                            $factorydata = mysqli_fetch_array($factory);
+                                            echo $factorydata['name'];
+                                        }
+                                    }
+
+                                ?>
                             </div>
                             <div class="col-md-6 d-grid d-md-flex justify-content-md-end">
-                                <a href="addfarmer.php" class="btn btn-secondary"><i class="ion ion-plus"> </i> Add</a>   
+                                <a href="factoryjournalpdf.php?id=<?php echo $societyid; ?>" class="btn btn-secondary" target="_blank"><i class="ion ion-plus"> </i> Generate PDF</a>   
                             </div>
                         </div>
                     </h5>
@@ -46,8 +55,8 @@ include('functions/sqlfunctions.php');
                                     <th scope="col">Cherry Grade I</th>
                                     <th scope="col">Cherry Grade II</th>
                                     <th scope="col">Mbuni</th>
-                                    <th scope="col">Members Number</th>
                                     <th scope="col">Members Name</th>
+                                    <th scope="col">Members Number</th>
                                     <th scope="col">Date</th>
                                 </tr>
                             </thead>
@@ -60,9 +69,33 @@ include('functions/sqlfunctions.php');
                                     if(mysqli_num_rows($deliveries)>0){
                                         foreach ($deliveries as $delivery) { ?>
                                             <tr>
-                                                <td><?php echo $delivery['farmer_id'] ?></td>
-                                                <td><?php echo $delivery['farmer_id'] ?></td>
-                                                <td><?php echo $delivery['farmer_id'] ?></td>
+                                                <td>
+                                                    <?php 
+                                                        if($delivery['item_id']==12){
+                                                            echo $delivery['qty_delivered'];
+                                                        }else{
+                                                            echo '--';
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                        if($delivery['item_id']==14){
+                                                            echo $delivery['qty_delivered'];
+                                                        }else{
+                                                            echo '--';
+                                                        } 
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                        if($delivery['item_id']==13){
+                                                            echo $delivery['qty_delivered'];
+                                                        }else{
+                                                            echo '--';
+                                                        } 
+                                                    ?>
+                                                </td>
                                                 <td>
                                                     <?php 
                                                     $id = $delivery['farmer_id'];
@@ -70,7 +103,7 @@ include('functions/sqlfunctions.php');
                                                     $farmer = mysqli_query($conn, $farmer_query);
                                                     if(mysqli_num_rows($farmer) > 0){
                                                         $data = mysqli_fetch_array($farmer);
-                                                        echo $data['first_name'];
+                                                        echo $data['first_name'].' '.$data['last_name'];
                                                     } 
                                                     ?>
                                                 </td>

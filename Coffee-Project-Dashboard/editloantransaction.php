@@ -1,7 +1,6 @@
 <?php 
 session_start();
 include('adminincludes/header.php'); 
-include('functions/sqlfunctions.php');
 
 ?>
 
