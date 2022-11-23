@@ -1,5 +1,16 @@
 <?php 
 session_start();
+if(isset($_SESSION['auth'])){
+    if($_SESSION['auth_user']['role'] == 'admin'){
+      $_SESSION['middleware'] = '';
+    }else{
+      $_SESSION['redirect'] = "You are not authorized to access this page.";
+      header('Location: ../Login-Page/login1.php');
+    }
+}else{
+    $_SESSION['redirect'] = "Login to continue.";
+    header('Location: ../Login-Page/login1.php');
+}
 include('functions/sqlfunctions.php');
 require_once 'dompdf/autoload.inc.php';
 
@@ -11,6 +22,9 @@ if(isset($_GET['id'])){
     $farmer = getByID('farmer', $farmerid);
     if(mysqli_num_rows($farmer) > 0){
         $farmerdata = mysqli_fetch_array($farmer);
+        $factoryid = $farmerdata['society_id'];
+        $factory = getByID('society', $factoryid);
+        $factorydata = mysqli_fetch_array($factory);
 
     }
 }
@@ -21,30 +35,87 @@ $html ='<!doctype html>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        #container{
+            width:1000px;
+            margin: 0;
+            margin-bottom: 3cm;
+        }
 
+        .col1{
+            width: 100px;
+            float: left;
+            margin: 10px;
+        }
+        
+        .col2{
+            width: 360px;
+            float: left;
+            margin: 10px;
+            margin-left: 2cm;
+            text-align: center;
+        }
+        
+        .col3 {
+            width: 360px;
+            float: right;
+            margin-bottom: 4mm;
+            margin-top: 1cm;
+        }
+
+        table,
         td,
-        h3,
-        p {
+        th {
+            border:2px solid #000;
+            border-collapse: collapse;
+        }
+
+        td {
             text-align: center;
         }
 
-        thead {
-            display: table-header-group; }
-          
-        table,
-        th,
-        td {
-        border-bottom: 1px solid #000; }
-          
-        td,
-        th {
-        padding: 8px 16px;
-        page-break-inside: avoid; }
     </style>
   </head>
   <body>
-    <h3 style="text-align: center;">'.$farmerdata['first_name'].' '.$farmerdata['last_name'].' Produce Record</h3>
-    <table style="width: 100%" border="1">
+  <div id="container">
+           
+    <div class="col1">
+        <h3>MEMBERS PRODUCE RECORD</h3>
+    </div>
+    <div class="col2">
+        <h4>'.$factorydata['name'].'</h4>
+        <h4>'.$farmerdata['first_name'].' '.$farmerdata['last_name'].' Record </h4>
+    </div>
+    <div class="col3">
+        <table>
+
+            <tr>
+                <td rowspan="2" colspan="3" style="width: 7mm;"></td>
+                
+                <td>MEMBER NO</td>
+                <td colspan="4" style="width: 7mm;">'.$farmerdata['member_number'].'</td>
+                
+            </tr>
+            <tr>
+                
+                <td colspan="3">ACTIVITY NO</td>
+                <td style="width: 7mm;"></td>
+                <td style="width: 7mm;"></td>
+            </tr>
+            <tr>
+                <td>PAGE NO</td>
+                <td style="width: 7mm;"></td>
+                <td style="width: 7mm;"></td>
+                <td>CSNO</td>
+                <td style="width: 7mm;"></td>
+                <td style="width: 7mm;"></td>
+                <td style="width: 7mm;"></td>
+                <td style="width: 7mm;"></td>
+            </tr>
+        </table>
+    </div>
+
+    </div>
+    <table style="width: 1000px">
         <thead>
         <tr>
             <th scope="col" rowspan="2">Date</th>

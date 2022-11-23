@@ -65,9 +65,9 @@ include('adminincludes/header.php');
                                                 <td><?php echo $item['unit_of_measurement'] ?></td>
                                                 <td><?php echo $item['date'] ?></td>
                                                 <td><button type="button" class="btn btn-primary itemeditbtn">
-                                                        <i class="ion ion-android-create"> </i> Update
+                                                        <i class="ion ion-android-create"> </i>
                                                             </button> | <button type="button" class="btn btn-danger itemdeletebtn">
-                                                            <i class="ion ion-android-delete"> </i> Delete</button></td>
+                                                            <i class="ion ion-android-delete"> </i></button></td>
                                             </tr>
                                     <?php }
                                     }

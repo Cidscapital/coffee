@@ -55,6 +55,7 @@ if(isset($_POST['registerBtn'])){
             $useremail = $userdata['email'];
 
             $_SESSION['auth_user'] = [
+                'role' => 'admin',
                 'name' => $username,
                 'email' => $useremail,
             ];
@@ -88,6 +89,7 @@ if(isset($_POST['registerBtn'])){
             $societyid = $userdata['society_id'];
 
             $_SESSION['auth_user'] = [
+                'role' => 'manager',
                 'name' => $username,
                 'societyid' => $societyid,
             ];

@@ -62,9 +62,9 @@ include('adminincludes/header.php');
                                             <td><?php echo $repayment['amount_paid']; ?></td>
                                             <td><?php echo $repayment['date']; ?></td>
                                             <td><button type="button" class="btn btn-primary repaymenteditbtn">
-                                                                        <i class="ion ion-android-create"> </i> Update
+                                                                        <i class="ion ion-android-create"> </i>
                                                                             </button> | <button type="button" class="btn btn-danger loanrepaymentdeletebtn">
-                                                                            <i class="ion ion-android-delete"> </i> Delete</button></td>
+                                                                            <i class="ion ion-android-delete"> </i></button></td>
                                         </tr>
                                 <?php }
 

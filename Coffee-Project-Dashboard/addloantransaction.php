@@ -11,12 +11,12 @@ include('adminincludes/header.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Add Loan Transaction</h1>
+            <h1 class="m-0">Add Debt Transaction</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="coffeeProjectDashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Add Loan Transaction</li>
+              <li class="breadcrumb-item active">Add Debt Transaction</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -30,7 +30,7 @@ include('adminincludes/header.php');
             <div class="col-md-10 mx-auto">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title"><strong>Add New Loan Transaction</strong></h3>
+                        <h3 class="card-title"><strong>Add New Debt Transaction</strong></h3>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="functions/loantransaction.php">
@@ -59,8 +59,8 @@ include('adminincludes/header.php');
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Expexted Pay Date</label>
-                                <input type="text" class="form-control" name="EPDate" placeholder="Format yyyy-mm-dd... eg 2022-11-04" required>
+                                <label class="form-label">Amount</label>
+                                <input type="text" class="form-control" name="amount" placeholder="Enter amount given" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Loan Status</label>

@@ -1,4 +1,15 @@
 <?php 
+if(isset($_SESSION['auth'])){
+  if($_SESSION['auth_user']['role'] == 'manager'){
+    $_SESSION['middleware'] = '';
+  }else{
+    $_SESSION['redirect'] = "You are not authorized to access this page.";
+    header('Location: ../Login-Page/managerlogin.php');
+  }
+}else{
+  $_SESSION['redirect'] = "Login to continue.";
+  header('Location: ../Login-Page/managerlogin.php');
+}
 
 $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
 ?>
@@ -130,10 +141,27 @@ $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
               </p>
             </a> 
           </li>
+          <li>
             <a href="managerfactoryjournal.php" class="nav-link <?= $path == 'managerfactoryjournal.php'?'active':''; ?>">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-folder-open"></i>
               <p>
                 Factory Journal
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="managersummary.php" class="nav-link <?= $path == 'managersummary.php'?'active':''; ?>">
+              <i class="nav-icon fas fa-file"></i>
+              <p>
+                Summary of Factory Journal
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="managergrosspayment.php" class="nav-link <?= $path == 'managergrosspayment.php'?'active':''; ?>">
+              <i class="nav-icon fas fa-money-bill"></i
+              <p>
+                Gross Payment Journal
               </p>
             </a>
           </li>

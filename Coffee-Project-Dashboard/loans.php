@@ -11,12 +11,12 @@ include('adminincludes/header.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Types of Loans</h1>
+            <h1 class="m-0">Types of Debts</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="coffeeProjectDashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Loans</li>
+              <li class="breadcrumb-item active">Debts</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -32,7 +32,7 @@ include('adminincludes/header.php');
                     <h5 class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                Types of Loans
+                                Types of Debts
                             </div>
                             <div class="col-md-6 d-grid d-md-flex justify-content-md-end">
                                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addLoan">
@@ -62,9 +62,9 @@ include('adminincludes/header.php');
                                             <td><?php echo $loan['name']; ?></td>
                                             <td><?php echo $loan['date']; ?></td>
                                             <td><button type="button" class="btn btn-primary loaneditbtn">
-                                                                <i class="ion ion-android-create"> </i> Update
+                                                                <i class="ion ion-android-create"> </i>
                                                                     </button> | <button type="button" class="btn btn-danger loandeletebtn">
-                                                                    <i class="ion ion-android-delete"> </i> Delete</button></td>
+                                                                    <i class="ion ion-android-delete"> </i></button></td>
                                         </tr>
                                 <?php    }
 
@@ -84,17 +84,17 @@ include('adminincludes/header.php');
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addLoan">Add Loan</h1>
+                <h1 class="modal-title fs-5" id="addLoan">Add Debt</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form method="POST" action="functions/loan.php">
                     <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter name of loan" required>
+                        <input type="text" name="name" class="form-control" placeholder="Enter name of debt" required>
                     </div>
                     
-                    <button type="submit" name="addLoan" class="btn btn-primary">Add Loan</button>
+                    <button type="submit" name="addLoan" class="btn btn-primary">Add Debt</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -110,7 +110,7 @@ include('adminincludes/header.php');
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editLoan">Update Loan</h1>
+                <h1 class="modal-title fs-5" id="editLoan">Update Debt</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -121,7 +121,7 @@ include('adminincludes/header.php');
                             <input type="text" name="name" id="name" class="form-control" placeholder="Enter name of loan" required>
                         </div>
                         
-                        <button type="submit" name="editLoan" class="btn btn-primary">Update Loan</button>
+                        <button type="submit" name="editLoan" class="btn btn-primary">Update Debt</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -136,11 +136,11 @@ include('adminincludes/header.php');
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title fs-5" id="deleteLoan">Delete Loan</h3>
+                <h3 class="modal-title fs-5" id="deleteLoan">Delete Debt</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p class="text-danger"><strong>Are you sure you want to delete this loan?</strong></p>
+                <p class="text-danger"><strong>Are you sure you want to delete this debt?</strong></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>

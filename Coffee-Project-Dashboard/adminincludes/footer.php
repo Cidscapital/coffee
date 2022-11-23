@@ -233,6 +233,52 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
+  $('.bankeditbtn').on('click', function() {
+
+    $('#editBank').modal('show');
+
+      $tr = $(this).closest('tr');
+
+      var data = $tr.children("td").map(function(){ 
+        return $(this).text();
+      }).get();
+
+      console.log(data);
+
+      $('#bankid').val(data[0]);
+      $('#name').val(data[1]);
+
+
+  });
+});
+
+</script>
+
+<script>
+$(document).ready(function() {
+  $('.bankdeletebtn').on('click', function() {
+
+    $('#deleteBank').modal('show');
+
+      $tr = $(this).closest('tr');
+
+      var data = $tr.children("td").map(function(){ 
+        return $(this).text();
+      }).get();
+
+      console.log(data);
+
+      $('#bankdeleteid').val(data[0]);
+
+
+  });
+});
+
+</script>
+
+
+<script>
+$(document).ready(function() {
   $('.loaneditbtn').on('click', function() {
 
     $('#editLoan').modal('show');
@@ -360,7 +406,8 @@ $(document).ready(function() {
 
       $('#rateid').val(data[0]);
       $('#rate').val(data[1]);
-      $('#status').val(data[2]);
+      $('#item').val(data[2]);
+      $('#status').val(data[3]);
 
   });
 });
@@ -404,6 +451,28 @@ $(document).ready(function() {
       console.log(data);
 
       $('#managerid').val(data[0]);
+
+
+  });
+});
+
+</script>
+
+<script>
+$(document).ready(function() {
+  $('.paymentdeletebtn').on('click', function() {
+
+    $('#deletePayment').modal('show');
+
+      $tr = $(this).closest('tr');
+
+      var data = $tr.children("td").map(function(){ 
+        return $(this).text();
+      }).get();
+
+      console.log(data);
+
+      $('#paymentid').val(data[0]);
 
 
   });

@@ -1,5 +1,16 @@
 <?php 
 session_start();
+if(isset($_SESSION['auth'])){
+    if($_SESSION['auth_user']['role'] == 'manager'){
+      $_SESSION['middleware'] = '';
+    }else{
+      $_SESSION['redirect'] = "You are not authorized to access this page.";
+      header('Location: ../Login-Page/managerlogin.php');
+    }
+}else{
+    $_SESSION['redirect'] = "Login to continue.";
+    header('Location: ../Login-Page/managerlogin.php');
+}
 include('functions/sqlfunctions.php');
 require_once 'dompdf/autoload.inc.php';
 

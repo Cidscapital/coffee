@@ -46,7 +46,8 @@ include('adminincludes/header.php');
                             <thead>
                                 <tr>
                                     <th scope="col">#_ID</th>
-                                    <th scope="col">Rate</th>
+                                    <th scope="col">Market Rate</th>
+                                    <th scope="col">Item ID</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Action</th>
@@ -58,13 +59,14 @@ include('adminincludes/header.php');
                                     foreach ($rates as $rate) { ?>
                                         <tr>
                                             <td><?php echo $rate['id']; ?></td>
-                                            <td><?php echo $rate['rate']; ?></td>
+                                            <td><?php echo $rate['market_rate']; ?></td>
+                                            <td><?php echo $rate['item_id']; ?></td>
                                             <td><?php echo $rate['status']; ?></td>
                                             <td><?php echo $rate['date']; ?></td>
                                             <td><button type="button" class="btn btn-primary rateeditbtn">
-                                                                        <i class="ion ion-android-create"> </i> Update
+                                                                        <i class="ion ion-android-create"> </i>
                                                                             </button> | <button type="button" class="btn btn-danger ratedeletebtn">
-                                                                            <i class="ion ion-android-delete"> </i> Delete</button></td>
+                                                                            <i class="ion ion-android-delete"> </i></button></td>
                                         </tr>
                                 <?php }
 
@@ -90,13 +92,28 @@ include('adminincludes/header.php');
             <div class="modal-body">
                 <form method="POST" action="functions/rate.php">
                     <div class="mb-3">
-                        <label class="form-label">Rate</label>
+                        <label class="form-label">Market Rate</label>
                         <input type="text" name="rate" class="form-control" placeholder="Enter your rate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Select Item</label>
+                        <select class="form-select" name="item">
+                            <option selected>Select Item</option>
+                            <?php
+                                $items = getAll('item', 'name');
+                                foreach ($items as $item) { ?>
+                                    <option value="<?php echo $item['id'] ?>"><?php echo $item['name'] ?></option>
+                            <?php }
+                            ?>
+                            
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
                         <select class="form-select" name="status">
-                            <option selected value="Current">Current</option>
+                            <option selected>Select Status</option>
+                            <option value="Current">Current</option>
+                            <option value="Deprecated">Deprecated</option>
                         </select>
                     </div>
                     <button type="submit" name="addRate" class="btn btn-primary">Add Rate</button>
@@ -122,13 +139,28 @@ include('adminincludes/header.php');
                 <form method="POST" action="functions/rate.php">
                     <input type="hidden" name="rateid" id="rateid">
                     <div class="mb-3">
-                        <label class="form-label">Rate</label>
+                        <label class="form-label">Market Rate</label>
                         <input type="text" name="rate" id="rate" class="form-control" placeholder="Enter your rate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Select Item</label>
+                        <select class="form-select" name="item" id="item">
+                            <option selected>Select Item</option>
+                            <?php
+                                $items = getAll('item', 'name');
+                                foreach ($items as $item) { ?>
+                                    <option value="<?php echo $item['id'] ?>" <?php ?>><?php echo $item['name'] ?></option>
+                            <?php }
+                            ?>
+                            
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Status</label>
                         <select class="form-select" name="status" id="status">
-                            <option selected value="Current">Current</option>
+                            <option selected>Select Status</option>
+                            <option value="Current">Current</option>
+                            <option value="Deprecated">Deprecated</option>
                         </select>
                     </div>
                     <button type="submit" name="editRate" class="btn btn-primary">Update Rate</button>

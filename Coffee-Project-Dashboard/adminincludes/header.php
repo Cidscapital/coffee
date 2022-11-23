@@ -1,4 +1,15 @@
 <?php 
+if(isset($_SESSION['auth'])){
+  if($_SESSION['auth_user']['role'] == 'admin'){
+    $_SESSION['middleware'] = '';
+  }else{
+    $_SESSION['redirect'] = "You are not authorized to access this page.";
+    header('Location: ../Login-Page/login1.php');
+  }
+}else{
+  $_SESSION['redirect'] = "Login to continue.";
+  header('Location: ../Login-Page/login1.php');
+}
 include('functions/sqlfunctions.php');
 $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
 ?>
@@ -39,20 +50,76 @@ $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
       <li class="nav-item d-none d-sm-inline-block">
         <a href="coffeeProjectDashboard.php" class="nav-link <?php if($path=='coffeeProjectDashboard.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Home</strong></a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="banks.php" class="nav-link <?php if($path=='banks.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Banks</strong></a>
+      </li>
       <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="items.php" class="nav-link <?php if($path=='items.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Items</strong></a>
       </li> -->
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="loans.php" class="nav-link <?php if($path=='loans.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Loans</strong></a>
+        <a href="loans.php" class="nav-link <?php if($path=='loans.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Debts</strong></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="loantransactions.php" class="nav-link <?php if($path=='loantransactions.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Loan Transactions</strong></a>
+        <a href="loantransactions.php" class="nav-link <?php if($path=='loantransactions.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Debt Transactions</strong></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="loanrepayments.php" class="nav-link <?php if($path=='loanrepayments.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Loan Repayments</strong></a>
+      </li> -->
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="currentrate.php" class="nav-link <?php if($path=='currentrate.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Market Rates</strong></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="currentrate.php" class="nav-link <?php if($path=='currentrate.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Current Rate</strong></a>
+        <a href="payments.php" class="nav-link <?php if($path=='payments.php'){ echo 'active'; }else{echo ''; } ?>"><strong>Payments</strong></a>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+          <strong>Generate PDF</strong>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <?php 
+              $factories = getAll('society', 'name');
+              foreach ($factories as $factory) { ?>
+                  <a href="factoryjournalpdf.php?id=<?php echo $factory['id'] ?>" class="dropdown-item" target="_blank">
+                    <i class="nav-icon fas fa-folder-open"></i> 
+                    <?php echo $factory['name'] ?>
+                    Journal
+                  </a>
+                  <div class="dropdown-divider"></div>
+          <?php }
+          ?>
+
+          <?php 
+              $factories = getAll('society', 'name');
+              foreach ($factories as $factory) { ?>
+                  <a href="summarypdf.php?id=<?php echo $factory['id'] ?>" class="dropdown-item" target="_blank">
+                    <i class="fas fa-file mr-2"></i> 
+                    <?php echo $factory['name'] ?>
+                    Summary
+                  </a>
+                  <div class="dropdown-divider"></div>
+          <?php }
+          ?>
+
+          <?php 
+              $factories = getAll('society', 'name');
+              foreach ($factories as $factory) { ?>
+                  <a href="grosspaymentpdf.php?id=<?php echo $factory['id'] ?>" class="dropdown-item" target="_blank">
+                    <i class="nav-icon fas fa-money-bill"></i>
+                    <?php echo $factory['name'] ?>
+                    Gross Payment Journal
+                  </a>
+                  <div class="dropdown-divider"></div>
+          <?php }
+          ?>
+
+          <a href="paymentcalculationrequestpdf.php" class="dropdown-item" target="_blank">
+            <i class="nav-icon fas fa-calculator"></i>
+            Payment Calculation Request
+          </a>
+          <div class="dropdown-divider"></div>
+
+        </div>
       </li>
     </ul>
 
@@ -144,7 +211,7 @@ $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
           </li>
           <li class="nav-item">
             <a href="managers.php" class="nav-link <?= $path == 'managers.php'?'active':''; ?>">
-              <i class="nav-icon fas fa-book"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Factory Managers
               </p>
@@ -173,12 +240,48 @@ $path = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/")+1);
             </ul>
           </li>
           <li class="nav-item">
-            <a href="summary.php" class="nav-link <?= $path == 'summary.php'?'active':''; ?>">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="#" class="nav-link <?= $path == 'summary.php'?'active':''; ?>">
+              <i class="nav-icon fas fa-file"></i>
               <p>
                 Summary of Factory Journals
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <?php 
+                $factories = getAll('society', 'name');
+                foreach ($factories as $factory) { ?>
+                  <li class="nav-item">
+                    <a href="summary.php?id=<?php echo $factory['id']; ?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p><?php echo $factory['name'].' '.'Summary' ?></p>
+                    </a>
+                  </li>
+          <?php  }
+              ?>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link <?= $path == 'grosspayment.php'?'active':''; ?>">
+            <i class="nav-icon fas fa-money-bill"></i>
+              <p>
+                 Gross Payment Journal
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <?php 
+                $factories = getAll('society', 'name');
+                foreach ($factories as $factory) { ?>
+                  <li class="nav-item">
+                    <a href="grosspayment.php?id=<?php echo $factory['id']; ?>" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p><?php echo $factory['name'].' '.'Payment Journal' ?></p>
+                    </a>
+                  </li>
+          <?php  }
+              ?>
+            </ul>
           </li>
         </ul>
       </nav>

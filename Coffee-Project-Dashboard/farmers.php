@@ -49,7 +49,6 @@ include('adminincludes/header.php');
                                     <th scope="col">Phone Number</th>
                                     <th scope="col">Location</th>
                                     <th scope="col">Society ID</th>
-                                    <th scope="col">Details</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -66,9 +65,9 @@ include('adminincludes/header.php');
                                             <td><?php echo $farmer['phone_number'] ?></td>
                                             <td><?php echo $farmer['location'] ?></td>
                                             <td><?php echo $farmer['society_id'] ?></td>
-                                            <td><a href="farmerdetails.php?id=<?php echo $farmer['id'] ?>">See Details</a></td>
-                                            <td><a href="editfarmer.php?id=<?php echo $farmer['id'] ?>" class="btn btn-primary">Edit</a> | 
-                                            <button type="button" class="btn btn-danger farmerdeletebtn">Delete</button></td>
+                                            <td><a href="farmerdetails.php?id=<?php echo $farmer['id'] ?>" class="btn" style="background-color: #C133FF;"><i class="ion ion-eye"> </i></a> | 
+                                            <a href="editfarmer.php?id=<?php echo $farmer['id'] ?>" class="btn btn-primary"><i class="ion ion-android-create"> </i></a> | 
+                                            <button type="button" class="btn btn-danger farmerdeletebtn"><i class="ion ion-android-delete"> </i></button></td>
                                         </tr>
                                 <?php }
                                     

@@ -10,12 +10,12 @@ include('adminincludes/header.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Loan Transactions</h1>
+            <h1 class="m-0">Debt Transactions</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="coffeeProjectDashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Loan Transactions</li>
+              <li class="breadcrumb-item active">Debt Transactions</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -31,7 +31,7 @@ include('adminincludes/header.php');
                     <h5 class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                Loan Transactions
+                                Debt Transactions
                             </div>
                             <div class="col-md-6 d-grid d-md-flex justify-content-md-end">
                                 <a href="addloantransaction.php" class="btn btn-secondary"><i class="ion ion-plus"> </i> Add</a>   
@@ -45,7 +45,7 @@ include('adminincludes/header.php');
                                     <th scope="col">#_ID</th>
                                     <th scope="col">Farmer ID</th>
                                     <th scope="col">Loan ID</th>
-                                    <th scope="col">Expected Pay Date</th>
+                                    <th scope="col">Amount</th>
                                     <th scope="col">Loan Status</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Action</th>
@@ -60,11 +60,11 @@ include('adminincludes/header.php');
                                             <td><?php echo $transaction['id'] ?></td>
                                             <td><?php echo $transaction['farmer_id'] ?></td>
                                             <td><?php echo $transaction['loan_id'] ?></td>
-                                            <td><?php echo $transaction['expected_payment_date'] ?></td>
+                                            <td><?php echo $transaction['amount'] ?></td>
                                             <td><?php echo $transaction['loan_status'] ?></td>
                                             <td><?php echo $transaction['date'] ?></td>
-                                            <td><a href="editloantransaction.php?id=<?php echo $transaction['id'] ?>" class="btn btn-primary"><i class="ion ion-android-create"> </i> Edit</a> | 
-                                                    <button type="button" class="btn btn-danger transactiondeletebtn"><i class="ion ion-android-delete"> </i> Delete</button></td>
+                                            <td><a href="editloantransaction.php?id=<?php echo $transaction['id'] ?>" class="btn btn-primary"><i class="ion ion-android-create"> </i></a> | 
+                                                    <button type="button" class="btn btn-danger transactiondeletebtn"><i class="ion ion-android-delete"> </i></button></td>
                                         </tr> 
                                  <?php }
 

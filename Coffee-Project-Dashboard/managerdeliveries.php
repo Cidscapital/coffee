@@ -69,8 +69,8 @@ include('functions/sqlfunctions.php');
                                                     <td><?php echo $delivery['item_id'] ?></td>
                                                     <td><?php echo $delivery['qty_delivered'] ?></td>
                                                     <td><?php echo $delivery['date'] ?></td>
-                                                    <td><a href="editdelivery.php?id=<?php echo $delivery['id'] ?>" class="btn btn-primary"><i class="ion ion-android-create"> </i> Update</a> | 
-                                                            <button type="button" class="btn btn-danger deleteDeliveryBtn"><i class="ion ion-android-delete"> </i> Delete</button></td>
+                                                    <td><a href="editdelivery.php?id=<?php echo $delivery['id'] ?>" class="btn btn-primary"><i class="ion ion-android-create"> </i></a> | 
+                                                            <button type="button" class="btn btn-danger deleteDeliveryBtn"><i class="ion ion-android-delete"> </i></button></td>
                                                 </tr>
                                         <?php }
 

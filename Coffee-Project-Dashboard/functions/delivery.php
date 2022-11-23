@@ -48,6 +48,9 @@ if(isset($_POST['addDelivery'])){
         $_SESSION['errormessage'] = "Something went wrong";
         header('Location: ../managerdeliveries.php');
     }
+}else {
+    $_SESSION['redirect'] = "You are not authorized to access this page.";
+    header('Location: ../Login-Page/login1.php');
 }
 
 

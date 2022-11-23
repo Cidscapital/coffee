@@ -1,0 +1,8 @@
+###Doctor###
+
+Assigns Patient to a Nurse After Appointment is met
+
+Nurse can assign medicine
+
+Nurse can book another appointment/clinic for the patient
+

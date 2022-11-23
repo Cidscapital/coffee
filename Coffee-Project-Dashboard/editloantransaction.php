@@ -11,12 +11,12 @@ include('adminincludes/header.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Edit Loan Transaction</h1>
+            <h1 class="m-0">Edit Debt Transaction</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="coffeeProjectDashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Edit Loan Transaction</li>
+              <li class="breadcrumb-item active">Edit Debt Transaction</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -30,7 +30,7 @@ include('adminincludes/header.php');
             <div class="col-md-10 mx-auto">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title"><strong>Edit Loan Transaction</strong></h3>
+                        <h3 class="card-title"><strong>Edit Debt Transaction</strong></h3>
                     </div>
                     <div class="card-body">
                         <?php
@@ -67,8 +67,8 @@ include('adminincludes/header.php');
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Expexted Pay Date</label>
-                                        <input type="text" class="form-control" value="<?php echo $data['expected_payment_date'] ?>" name="EPDate" placeholder="Format yyyy-mm-dd... eg 2022-11-04" required>
+                                        <label class="form-label">Amount</label>
+                                        <input type="text" class="form-control" value="<?php echo $data['amount'] ?>" name="amount" placeholder="Enter amount given" required>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Loan Status</label>

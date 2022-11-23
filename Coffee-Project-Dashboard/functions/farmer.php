@@ -7,13 +7,14 @@ if(isset($_POST['addFarmer'])){
     $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_SPECIAL_CHARS);
     $mnumber = filter_input(INPUT_POST, 'mnumber', FILTER_SANITIZE_SPECIAL_CHARS);
     $societyid = filter_input(INPUT_POST, 'societyid', FILTER_SANITIZE_SPECIAL_CHARS);
+    $bankid = filter_input(INPUT_POST, 'bankid', FILTER_SANITIZE_SPECIAL_CHARS);
     $bnumber = filter_input(INPUT_POST, 'bnumber', FILTER_SANITIZE_SPECIAL_CHARS);
     $oamount = filter_input(INPUT_POST, 'oamount', FILTER_SANITIZE_SPECIAL_CHARS);
     $pnumber = filter_input(INPUT_POST, 'pnumber', FILTER_SANITIZE_SPECIAL_CHARS);
     $location = filter_input(INPUT_POST, 'location', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    $add_farmer = "INSERT INTO farmer(first_name, last_name, member_number, society_id, bank_number, open_amount, phone_number, location)
-                    VALUES('$fname', '$lname', '$mnumber', '$societyid', '$bnumber', '$oamount', '$pnumber', '$location') ";
+    $add_farmer = "INSERT INTO farmer(first_name, last_name, member_number, society_id, bank_id, bank_number, open_amount, phone_number, location)
+                    VALUES('$fname', '$lname', '$mnumber', '$societyid', $bankid, '$bnumber', '$oamount', '$pnumber', '$location') ";
     $add_farmer_run = mysqli_query($conn, $add_farmer);
     if($add_farmer_run){
         $_SESSION['successmessage'] = "Farmer was added successfully";
@@ -58,6 +59,9 @@ if(isset($_POST['addFarmer'])){
         $_SESSION['errormessage'] = "Something went wrong";
         header('Location: ../farmers.php');
     }
+}else {
+    $_SESSION['redirect'] = "You are not authorized to access this page.";
+    header('Location: ../../Login-Page/login1.php');
 }
 
 

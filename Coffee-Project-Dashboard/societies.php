@@ -64,9 +64,9 @@ include('adminincludes/header.php');
                                             <td><?php echo $society['number'] ?></td>
                                             <td><?php echo $society['date_joined'] ?></td>
                                             <td><button type="button" class="btn btn-primary editbtn">
-                                            <i class="ion ion-android-create"> </i> Update
+                                            <i class="ion ion-android-create"> </i>
                                                 </button> | <button type="button" class="btn btn-danger deletebtn">
-                                                <i class="ion ion-android-delete"> </i> Delete</button></td>
+                                                <i class="ion ion-android-delete"> </i></button></td>
                                         </tr>
 
                                     <?php }

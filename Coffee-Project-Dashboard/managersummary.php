@@ -1,6 +1,7 @@
 <?php 
 session_start();
-include('adminincludes/header.php');
+include('adminincludes/managerheader.php'); 
+include('functions/sqlfunctions.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -10,12 +11,12 @@ include('adminincludes/header.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Summary of Factory Journals</h1>
+            <h1 class="m-0">Summary of Factory Journal</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="coffeeProjectDashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Summary of Factory Journals</li>
+              <li class="breadcrumb-item active">Summary of Factory Journal</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -32,8 +33,8 @@ include('adminincludes/header.php');
                         <div class="row">
                             <div class="col-md-6">
                                 <?php
-                                    if(isset($_GET['id'])){
-                                        $societyid = $_GET['id'];
+                                    if(isset($_SESSION['auth_user'])){
+                                        $societyid = $_SESSION['auth_user']['societyid'];
                                         $factory = getByID('society', $societyid);
                                         if(mysqli_num_rows($factory) > 0){
                                             $factorydata = mysqli_fetch_array($factory);
@@ -44,7 +45,7 @@ include('adminincludes/header.php');
                                 ?>
                             </div>
                             <div class="col-md-6 d-grid d-md-flex justify-content-md-end">
-                                <a href="summarypdf.php?id=<?php echo $societyid ?>" class="btn btn-secondary" target="_blank"><i class="ion ion-plus"> </i> Generate PDF</a>   
+                                <a href="managersummarypdf.php" class="btn btn-secondary" target="_blank"><i class="ion ion-plus"> </i> Generate PDF</a>   
                             </div>
                         </div>
                     </h5>

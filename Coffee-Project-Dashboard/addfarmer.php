@@ -61,6 +61,20 @@ include('adminincludes/header.php');
                                 </select>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Bank</label>
+                                <select name="bankid" class="form-select">
+                                    <option selected>Select Bank</option>
+
+                                    <?php 
+                                        $banks = getAll('banks', 'name'); 
+                                        foreach ($banks as $bank) { ?>
+                                            <option value="<?php echo $bank['id'];  ?>"><?php echo $bank['name'];  ?></option>
+                                    <?php }
+                                    ?>
+                                    
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label">Bank Number</label>
                                 <input type="text" class="form-control" name="bnumber" placeholder="Enter bank number" required>
                             </div>

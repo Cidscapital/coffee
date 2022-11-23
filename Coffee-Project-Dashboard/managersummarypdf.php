@@ -1,15 +1,15 @@
 <?php 
 session_start();
 if(isset($_SESSION['auth'])){
-  if($_SESSION['auth_user']['role'] == 'admin'){
+  if($_SESSION['auth_user']['role'] == 'manager'){
     $_SESSION['middleware'] = '';
   }else{
     $_SESSION['redirect'] = "You are not authorized to access this page.";
-    header('Location: ../Login-Page/login1.php');
+    header('Location: ../Login-Page/managerlogin.php');
   }
 }else{
   $_SESSION['redirect'] = "Login to continue.";
-  header('Location: ../Login-Page/login1.php');
+  header('Location: ../Login-Page/managerlogin.php');
 }
 include('functions/sqlfunctions.php');
 require_once 'dompdf/autoload.inc.php';
@@ -17,8 +17,8 @@ require_once 'dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-if(isset($_GET['id'])){
-  $societyid = $_GET['id'];
+if(isset($_SESSION['auth_user'])){
+  $societyid = $_SESSION['auth_user']['societyid'];
   $factory = getByID('society', $societyid);
   if(mysqli_num_rows($factory) > 0){
       $factorydata = mysqli_fetch_array($factory);

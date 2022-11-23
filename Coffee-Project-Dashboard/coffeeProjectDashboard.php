@@ -33,14 +33,19 @@ include('adminincludes/header.php');
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>
+                  <?php
+                    $managers = getAll('factory_manager', 'first_name');
+                    echo mysqli_num_rows($managers);
+                  ?>
+                </h3>
 
-                <p>Factory Journal</p>
+                <p>Factory Managers</p>
               </div>
               <div class="icon">
                 <i class="ion ion-ios-book-outline"></i>
               </div>
-              <a href="#" class="small-box-footer"><strong>More info</strong><i class="fas fa-arrow-circle-right"></i></a>
+              <a href="managers.php" class="small-box-footer"><strong>More info</strong><i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -48,14 +53,22 @@ include('adminincludes/header.php');
             <!-- small box -->
             <div class="small-box" style="background-color: #E6E6FA;">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>
+                  <?php
+                  $deliveries_received = "SELECT sum(qty_delivered) as kilos FROM deliveries";
+                  $deliveries = mysqli_query($conn, $deliveries_received);
+                  $data = mysqli_fetch_array($deliveries);
+                  echo $data['kilos'];
 
-                <p>Kilos Received Rate</p>
+                  ?>
+                  <sup style="font-size: 20px">Kgs</sup></h3>
+
+                <p>All Kilos Received</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer"><strong>More info</strong><i class="fas fa-arrow-circle-right"></i></a>
+              <a href="deliveries.php" class="small-box-footer"><strong>More info</strong><i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -64,7 +77,12 @@ include('adminincludes/header.php');
             <!-- small box -->
             <div class="small-box" style="background-color: #B2FFFF;">
               <div class="inner">
-                <h3>44</h3>
+                <h3>
+                  <?php
+                    $farmers = getAll('farmer', 'first_name');
+                    echo mysqli_num_rows($farmers);
+                  ?>
+                </h3>
 
                 <p>Farmers Registered</p>
               </div>
@@ -80,9 +98,15 @@ include('adminincludes/header.php');
             <!-- small box -->
             <div class="small-box" style="background-color: #7CB9E8;">
               <div class="inner">
-                <h3>65</h3>
+                <h3>
+                  <?php
+                    $factories = getAll('society', 'name');
+                    echo mysqli_num_rows($factories);
 
-                <p>Socities Joined</p>
+                  ?>
+                </h3>
+
+                <p>Factories Registered</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -128,9 +152,9 @@ include('adminincludes/header.php');
         <div class="col-md-6">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Socity Daily Kilos</h3>
+              <h3 class="card-title">Overall Running Total</h3>
 
-              <div class="card-tools">
+              <!-- <div class="card-tools">
                 <ul class="pagination pagination-sm float-right">
                   <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
                   <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -138,62 +162,74 @@ include('adminincludes/header.php');
                   <li class="page-item"><a class="page-link" href="#">3</a></li>
                   <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
                 </ul>
-              </div>
+              </div> -->
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Date</th>
-                    <th>Progress</th>
-                    <th style="width: 40px">Label</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1.</td>
-                    <td>28-09-2022</td>
-                    <td>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar" style="width: 55%; background-color: #7CB9E8;"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge" style="background-color: #B2FFFF;">55%</span></td>
-                  </tr>
-                  <tr>
-                    <td>2.</td>
-                    <td>29-09-2022</td>
-                    <td>
-                      <div class="progress progress-xs">
-                        <div class="progress-bar" style="width: 75%; background-color: #7CB9E8;"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge" style="background-color: #B2FFFF;">70%</span></td>
-                  </tr>
-                  <tr>
-                    <td>3.</td>
-                    <td>30-09-2022</td>
-                    <td>
-                      <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar" style="width: 30%; background-color: #7CB9E8;"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge" style="background-color: #B2FFFF;">30%</span></td>
-                  </tr>
-                  <tr>
-                    <td>4.</td>
-                    <td>31-09-2022</td>
-                    <td>
-                      <div class="progress progress-xs progress-striped active">
-                        <div class="progress-bar" style="width: 90%; background-color: #7CB9E8;"></div>
-                      </div>
-                    </td>
-                    <td><span class="badge" style="background-color: #B2FFFF;">90%</span></td>
-                  </tr>
-                </tbody>
-              </table>
+                <table id="tableID" class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">CHERY GRADE I</th>
+                                    <th scope="col">CHERY GRADE II</th>
+                                    <th scope="col">MBUNI</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $current_date = date("Y-m-d");
+                                    $fjno = 637;
+                                    $total = 0;
+                                    $running_total = 0;
+                                    $totalII = 0;
+                                    $running_totalII = 0;
+                                    $totalm = 0;
+                                    $running_totalm = 0;
+                                    $sql = "SELECT * FROM deliveries GROUP BY date";
+                                    $deliveries = mysqli_query($conn, $sql);
+                                    foreach ($deliveries as $delivery) { 
+                                        $date = $delivery['date'];
+                                        $sql2 = "SELECT * FROM deliveries WHERE date = '$date' ";
+                                        $sql2_run = mysqli_query($conn, $sql2);
+                                        foreach ($sql2_run as $item) {
+                                            if($item['item_id'] == 12){
+                                                $cheryI = $item['qty_delivered'];
+                                                $total = $total + $cheryI;
+                                                $running_total = $running_total + $cheryI;
+                                            }else if($item['item_id'] == 14){
+                                                $cheryII = $item['qty_delivered'];
+                                                $totalII = $totalII + $cheryII;
+                                                $running_totalII = $running_totalII + $cheryII;
+                                            } else if($item['item_id'] == 13){
+                                                $mbuni = $item['qty_delivered'];
+                                                $totalm = $totalm + $mbuni;
+                                                $running_totalm = $running_totalm + $mbuni;
+                                            }
+                                        } 
+                                         
+                                        
+                                        ?>
+
+
+                                        <tr>
+                                            <td><?php echo $delivery['date']; ?></td>
+                                            <td><?php echo $running_total; ?> Kgs</td>
+                                            <td><?php echo $running_totalII; ?> Kgs</td>
+                                            <td><?php echo $running_totalm; ?> Kgs</td>
+                                        </tr>
+
+                                <?php 
+                                        $fjno = $fjno + 1;
+                                        $total = 0;
+                                        $totalII = 0;
+                                        $totalm = 0;
+                                    }
+                                    
+                                ?>
+    
+                            </tbody>
+                </table>
             </div>
             <!-- /.card-body -->
           </div>

@@ -10,12 +10,12 @@ include('adminincludes/header.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Deliveries</h1>
+            <h1 class="m-0"> All Deliveries</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="coffeeProjectDashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Deliveries</li>
+              <li class="breadcrumb-item active">All Deliveries</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -31,10 +31,10 @@ include('adminincludes/header.php');
                     <h5 class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                Deliveries
+                                All Deliveries
                             </div>
                             <div class="col-md-6 d-grid d-md-flex justify-content-md-end">
-                                <a href="adddelivery.php" class="btn btn-secondary"><i class="ion ion-plus"> </i> Add</a>   
+                                <!--<a href="adddelivery.php" class="btn btn-secondary"><i class="ion ion-plus"> </i> Add</a>-->
                             </div>
                         </div>
                     </h5>
@@ -48,7 +48,6 @@ include('adminincludes/header.php');
                                     <th scope="col">Item ID</th>
                                     <th scope="col">Qty_Delivered</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,8 +62,6 @@ include('adminincludes/header.php');
                                             <td><?php echo $delivery['item_id'] ?></td>
                                             <td><?php echo $delivery['qty_delivered'] ?></td>
                                             <td><?php echo $delivery['date'] ?></td>
-                                            <td><a href="editdelivery.php?id=<?php echo $delivery['id'] ?>" class="btn btn-primary"><i class="ion ion-android-create"> </i> Update</a> | 
-                                                    <button type="button" class="btn btn-danger deleteDeliveryBtn"><i class="ion ion-android-delete"> </i> Delete</button></td>
                                         </tr>
                                     <?php }
 

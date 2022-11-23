@@ -62,8 +62,8 @@ include('adminincludes/header.php');
                                             <td><?php echo $manager['username'] ?></td>
                                             <td><?php echo $manager['society_id'] ?></td>
                                             <td><?php echo $manager['date_joined'] ?></td>
-                                            <td><a href="editmanager.php?id=<?php echo $manager['id'] ?>" class="btn btn-primary"><i class="ion ion-android-create"> </i> Update</a> | 
-                                                    <button type="button" class="btn btn-danger managerdeletebtn"><i class="ion ion-android-delete"> </i> Delete</button></td>
+                                            <td><a href="editmanager.php?id=<?php echo $manager['id'] ?>" class="btn btn-primary"><i class="ion ion-android-create"> </i></a> | 
+                                                    <button type="button" class="btn btn-danger managerdeletebtn"><i class="ion ion-android-delete"> </i></button></td>
                                         </tr>
                                 <?php }
 

@@ -7,6 +7,20 @@ include('../includes/header.php');
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-10">
+              <div class="container">
+                <?php  
+                  if(isset($_SESSION['redirect'])){ ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <strong>Error Message!</strong> <?php echo $_SESSION['redirect']; ?>
+                    </div>
+                <?php  
+                    unset($_SESSION['redirect']);
+                  }
+
+
+                ?>
+                
+              </div>
               <div class="card rounded-3 text-black">
                 <div class="row g-0">
                   <div class="col-lg-6">
